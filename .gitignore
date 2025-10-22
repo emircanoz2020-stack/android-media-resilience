@@ -57,6 +57,7 @@ firebase-config.json
 
 # Log Files
 *.log
+LOGS_*.txt
 
 # Android Profiling
 *.hprof
