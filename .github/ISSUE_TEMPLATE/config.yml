@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🔒 Security Vulnerability Report
+    url: https://github.com/emircanoz2020-stack/android-media-resilience/security/advisories/new
+    about: "⚠️ DO NOT open public issues for security vulnerabilities! Use private Security Advisory instead."
+  - name: 📖 Documentation
+    url: https://github.com/emircanoz2020-stack/android-media-resilience#readme
+    about: Check README for common questions before opening an issue

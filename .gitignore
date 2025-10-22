@@ -1,0 +1,105 @@
+# Built application files
+*.apk
+*.aab
+*.ap_
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+*/build/
+.cxx/
+
+# Gradle files
+.gradle/
+gradle-app.setting
+
+# IMPORTANT: Include Gradle wrapper JAR for reproducible builds
+!gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.iws
+*.ipr
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Android Studio captures folder
+captures/
+
+# Keystore files (NEVER commit!)
+*.jks
+*.keystore
+release.keystore
+debug.keystore
+signing.properties
+keystore.properties
+
+# Google Services / Firebase
+google-services.json
+firebase-config.json
+
+# External native build
+.externalNativeBuild
+
+# Log Files
+*.log
+
+# Android Profiling
+*.hprof
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# OneDrive lock files
+*.tmp
+~$*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# ProGuard mapping (DO NOT commit - upload to Play Console instead)
+mapping/
+mapping.txt
+
+# SBOM and license reports (can be generated, optionally commit)
+# Uncomment if you don't want these in git:
+# bom.json
+# THIRD_PARTY_LICENSES/licenses.json
+# THIRD_PARTY_LICENSES/DEPENDENCIES.txt
+
+# Backup files
+*.bak
+*.swp
+*~
+
+# Test results
+test-results/
+screenshots/
+
+# Lint
+lint-results*.html
+lint-results*.xml
+
+# NDK
+obj/
+
+# Windows reserved names
+nul

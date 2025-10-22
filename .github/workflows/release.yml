@@ -1,0 +1,108 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Gradle cache
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build Sample App
+        run: ./gradlew :sample:assembleRelease
+
+      - name: Create Documentation Bundle
+        run: |
+          mkdir -p docs-bundle
+          cp README.md CHANGELOG.md SECURITY.md CONTRIBUTING.md LICENSE NOTICE docs-bundle/
+          cp DEBUG_RAPORU_8_30_54.md docs-bundle/ 2>/dev/null || echo "DEBUG_RAPORU not found, skipping"
+          cp -r docs/ docs-bundle/ 2>/dev/null || echo "docs/ not found, skipping"
+
+          # Get version from tag (remove 'v' prefix)
+          VERSION=${GITHUB_REF_NAME#v}
+
+          # Create ZIP bundle
+          cd docs-bundle
+          zip -r ../android-media-resilience-docs-v${VERSION}.zip .
+          cd ..
+
+      - name: Generate Checksums
+        run: |
+          # Sample APK checksum
+          cd sample/build/outputs/apk/release
+          sha256sum sample-release.apk > CHECKSUMS.txt
+
+          # Docs bundle checksum
+          cd ../../../../..
+          sha256sum android-media-resilience-docs-*.zip >> sample/build/outputs/apk/release/CHECKSUMS.txt
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            sample/build/outputs/apk/release/sample-release.apk
+            sample/build/outputs/apk/release/CHECKSUMS.txt
+            android-media-resilience-docs-v*.zip
+          body: |
+            ## Android Media Resilience ${{ github.ref_name }}
+
+            **Repository Type:** Hybrid (Documentation + Sample App)
+
+            ### 📱 Sample App
+            - **`sample-release.apk`** - Minimal demo app (installable on Android 8+)
+            - Features:
+              - Memory profiling (display current RAM usage)
+              - Cache management (show size, clear cache button)
+              - Documentation links (GitHub repository)
+            - **NOT a full library** - This is a demonstration app only
+            - Library (AAR) coming in v1.1.0
+
+            ### 📚 Documentation Bundle
+            - **`android-media-resilience-docs-v${{ github.ref_name }}.zip`** - Offline documentation
+            - Includes:
+              - README.md (comprehensive guide)
+              - Turkish debug report (DEBUG_RAPORU_8_30_54.md - 6,500+ lines)
+              - Security policy, contributing guidelines
+              - Installation guides, memory optimization patterns
+              - OEM compatibility notes (Samsung One UI, MIUI)
+
+            ### ✅ Installation
+
+            **Sample App:**
+            ```bash
+            # Download and verify
+            sha256sum -c CHECKSUMS.txt
+
+            # Install via ADB
+            adb install -r sample-release.apk
+            ```
+
+            **Documentation:**
+            ```bash
+            # Extract offline docs
+            unzip android-media-resilience-docs-v${{ github.ref_name }}.zip
+            ```
+
+            ### 🛣️ Roadmap
+            - ✅ v1.0.0: Documentation + Sample App
+            - ⏳ v1.1.0: Core library (AAR) with resilience modules
+            - ⏳ v1.2.0: Instrumented tests + CI improvements
+
+            ---
+
+            **Full changelog:** [CHANGELOG.md](https://github.com/emircanoz2020-stack/android-media-resilience/blob/main/CHANGELOG.md)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

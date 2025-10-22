@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Media Resilience Demo</string>
+    <string name="app_logo">App Logo</string>
+
+    <string name="welcome_message">Android Media Resilience\nSample Demo App v1.0.0\n\nMinimal demonstration app.\nFor full library (AAR), see v1.1.0+</string>
+
+    <string name="memory_profiling">Memory Profiling</string>
+    <string name="cache_management">Cache Management</string>
+    <string name="view_documentation">View Documentation</string>
+
+    <string name="footer_message">Apache-2.0 License | GitHub: emircanoz2020-stack/android-media-resilience</string>
+</resources>

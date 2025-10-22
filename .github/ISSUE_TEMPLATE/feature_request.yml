@@ -1,0 +1,68 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request Guidelines
+        Before submitting, check [existing issues](https://github.com/emircanoz2020-stack/android-media-resilience/issues) to avoid duplicates.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: "Currently, audio focus is not restored when Bluetooth reconnects..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+      placeholder: "Add a 250-500ms debounce delay before requesting audio focus on BT reconnect..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions you've thought about?
+      placeholder: "Immediate audio focus request (current behavior, causes glitches)"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (Your Opinion)
+      description: How important is this to you?
+      options:
+        - Nice to have
+        - Would improve my experience
+        - Critical for my use case
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other context, screenshots, or examples?
+      placeholder: "This issue affects Samsung devices with Buds2 Pro..."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: This feature aligns with the project's goals (network resilience, media playback)
+          required: false

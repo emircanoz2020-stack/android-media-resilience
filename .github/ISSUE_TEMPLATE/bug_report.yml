@@ -1,0 +1,115 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Security Warning
+        **DO NOT report security vulnerabilities here!**
+        Use [GitHub Security Advisory](https://github.com/emircanoz2020-stack/android-media-resilience/security/advisories/new) for private disclosure.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the bug
+      placeholder: "Playback stops when switching to mobile data..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Open app
+        2. Play a song
+        3. Switch WiFi → Mobile data
+        4. Playback stops
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: "Playback continues seamlessly"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: App Version
+      description: Which version are you using?
+      placeholder: "v1.3.0"
+    validations:
+      required: true
+
+  - type: input
+    id: android
+    attributes:
+      label: Android Version
+      description: Which Android version?
+      placeholder: "Android 13 (API 33)"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Device model and manufacturer
+      placeholder: "Samsung Galaxy A34 (SM-A346B)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: network
+    attributes:
+      label: Network Type
+      description: Are you using VPN/proxy?
+      options:
+        - Direct connection (no VPN/proxy)
+        - VPN active
+        - Corporate proxy
+        - Mobile hotspot
+        - Other (specify in description)
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (if applicable)
+      description: |
+        Paste relevant logcat output (Redact sensitive data!)
+
+        **Quick log collection:**
+        ```bash
+        adb logcat -v time | grep -iE "AndroidRuntime|ExoPlayer|MediaCodec|AudioTrack|Playback|HttpDataSource|crash|fatal"
+        ```
+
+        See README.md "Collecting Logs for Bug Reports" section for full instructions.
+      placeholder: |
+        E/ExoPlayerImpl: Playback error
+        com.google.android.exoplayer2.ExoPlaybackException: ...
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I have redacted any sensitive information (tokens, personal data)
+          required: true
+        - label: This is NOT a security vulnerability (use Security Advisory for that)
+          required: true
